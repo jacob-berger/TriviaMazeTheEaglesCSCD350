@@ -12,11 +12,21 @@ public class Question {
 	private String response3;
 	private Connection database;
 
-	protected Question(QuestionType type) throws NullPointerException, IllegalArgumentException {
-		if (type == null) {
-			throw new NullPointerException("The type is null");
+	protected Question() throws NullPointerException, IllegalArgumentException {
+		double random = Math.random();
+		random = random * 3 + 1;
+		int choice = (int) random;
+		switch (choice) {
+		case 1:
+			type = QuestionType.TRUE_FALSE;
+			break;
+		case 2:
+			type = QuestionType.MULTIPLE_CHOICE;
+			break;
+		case 3:
+			type = QuestionType.SHORT_ANSWER;
+			break;
 		}
-		this.type = type;
 
 		ArrayList<String> results = this.retrieveQuestion(type);
 		this.question = results.get(0);
@@ -117,14 +127,27 @@ public class Question {
 	}
 
 //	public static void main(String[] args) {
-//		Question question = new Question(QuestionType.TRUE_FALSE);
+//		Question question = new Question();
 //		System.out.println(question.toString());
 //		System.out.println();
-//		question = new Question(QuestionType.MULTIPLE_CHOICE);
+//		question = new Question();
 //		System.out.println(question.toString());
 //		System.out.println();
-//		question = new Question(QuestionType.SHORT_ANSWER);
+//		question = new Question();
 //		System.out.println(question.toString());
+//		System.out.println();
+//		question = new Question();
+//		System.out.println(question.toString());
+//		System.out.println();
+//		question = new Question();
+//		System.out.println(question.toString());
+//		System.out.println();
+//		question = new Question();
+//		System.out.println(question.toString());
+//		System.out.println();
+//		question = new Question();
+//		System.out.println(question.toString());
+//		System.out.println();
 //	}
 
 }
