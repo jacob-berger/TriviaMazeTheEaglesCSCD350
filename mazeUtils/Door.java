@@ -22,6 +22,10 @@ public class Door {
 		return this.question;
 	}
 	
+	public String toString() {
+		return "Question: " + this.getQuestion() + "\n" + "Answer: " + "\n" + "Locked?" + this.getLocked();
+	}
+	
 	//Do we need a setter for the Question? Should really only need to be changed when Door is created.
 
 }
