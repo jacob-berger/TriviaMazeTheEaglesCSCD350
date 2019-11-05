@@ -1,5 +1,5 @@
 package mazeUtils;
-
+//test
 public class Maze {
 	
 	protected Room[][] rooms;
@@ -24,7 +24,7 @@ public class Maze {
 			for (int iy = 1; iy < columns - 1; iy++) {
 				rooms[ix][iy] = new Room(new Door(), new Door(), new Door(), new Door(), false, false);
 			}
-		}
+		} 
 	}
 
 }
