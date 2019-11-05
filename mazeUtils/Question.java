@@ -126,28 +126,28 @@ public class Question {
 		return result;
 	}
 
-//	public static void main(String[] args) {
-//		Question question = new Question();
-//		System.out.println(question.toString());
-//		System.out.println();
-//		question = new Question();
-//		System.out.println(question.toString());
-//		System.out.println();
-//		question = new Question();
-//		System.out.println(question.toString());
-//		System.out.println();
-//		question = new Question();
-//		System.out.println(question.toString());
-//		System.out.println();
-//		question = new Question();
-//		System.out.println(question.toString());
-//		System.out.println();
-//		question = new Question();
-//		System.out.println(question.toString());
-//		System.out.println();
-//		question = new Question();
-//		System.out.println(question.toString());
-//		System.out.println();
-//	}
+	public static void main(String[] args) {
+		Question question = new Question();
+		System.out.println(question.toString());
+		System.out.println();
+		question = new Question();
+		System.out.println(question.toString());
+		System.out.println();
+		question = new Question();
+		System.out.println(question.toString());
+		System.out.println();
+		question = new Question();
+		System.out.println(question.toString());
+		System.out.println();
+		question = new Question();
+		System.out.println(question.toString());
+		System.out.println();
+		question = new Question();
+		System.out.println(question.toString());
+		System.out.println();
+		question = new Question();
+		System.out.println(question.toString());
+		System.out.println();
+	}
 
 }
