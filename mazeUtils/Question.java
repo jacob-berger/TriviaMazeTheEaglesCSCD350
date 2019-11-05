@@ -133,7 +133,7 @@ public class Question {
 		question = new Question();
 		System.out.println(question.toString());
 		System.out.println();
-		question = new Question();
+//		question = new Question();
 		System.out.println(question.toString());
 		System.out.println();
 		question = new Question();
