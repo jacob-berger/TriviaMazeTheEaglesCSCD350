@@ -73,14 +73,14 @@ public class Question {
 			//Get total number of questions in table
 			ResultSet resultSet = statement.executeQuery("select count(*) from " + type.toString());
 			int totalQuestions = resultSet.getInt("count(*)");
-			System.out.println("Total questions " + totalQuestions);
+//			System.out.println("Total questions " + totalQuestions);
 
 			//Get random question
 			double randomDouble = Math.random();
 			randomDouble = randomDouble * totalQuestions + 1;
 			int question_number = (int) randomDouble;
-			System.out.println("Question number " + question_number);
-			System.out.println();
+//			System.out.println("Question number " + question_number);
+//			System.out.println();
 			resultSet = statement.executeQuery("select * from " + type.toString() + " where question_number = " + question_number);
 			results.add(resultSet.getString("question"));
 			results.add(resultSet.getString("answer"));
