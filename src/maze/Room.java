@@ -1,0 +1,93 @@
+package maze;
+
+public class Room {
+	
+	private Door n, e, s, w;
+	private boolean entrance, exit;
+	
+	protected Room() {
+		n = new Door();
+		e = new Door();
+		s = new Door();
+		w = new Door();
+		entrance = false;
+		exit = false;
+	}
+	
+	protected Room(Door north, Door east, Door south, Door west, boolean entrance, boolean exit) {
+		n = north;
+		e = east;
+		s = south;
+		w = west;
+		this.entrance = entrance;
+		this.exit = exit;
+	}
+	/**
+	 * I'm adding this constructor for now because I think adding the Door obj's as parameters isn't
+	 * necessary. 
+	 * @param entrance
+	 * @param exit
+	 */
+	protected Room(boolean entrance, boolean exit) {
+		n = new Door();
+		e = new Door();
+		s = new Door();
+		w = new Door();
+		this.entrance = entrance;
+		this.exit = exit;
+	}
+	
+	protected boolean getEntrance() {
+		return entrance;
+	}
+	
+	protected boolean getExit() {
+		return exit;
+	}
+	
+	//Do we need setters for entrance/exit?
+	//Steven: I like that it's done in the constructor call.
+	
+	public String toString() {
+		String result = "";
+		result += "North: " + ((n.getLocked() == true) ? "Locked" : "Unlocked");
+		result += "\nEast: " + ((e.getLocked() == true) ? "Locked" : "Unlocked");
+		result += "\nSouth: " + ((s.getLocked() == true) ? "Locked" : "Unlocked");
+		result += "\nWest: " + ((w.getLocked() == true) ? "Locked" : "Unlocked");
+		
+		return result;
+	}
+	
+	protected Door getDoor(String direction) {
+		switch (direction) {
+		case "n":
+			return n;
+		case "e":
+			return e;
+		case "s":
+			return s;
+		case "w":
+			return w;
+		}
+		
+		return n;
+	}
+	/**
+	 * sets a door specified by direction, locked or unlocked
+	 * @param direction
+	 * @param locked
+	 */
+	protected void setDoor(String direction, boolean locked) { // maybe change direction to char to be consistent with regex
+		switch (direction) {
+		case "n":
+			n.setLocked(locked);
+		case "e":
+			e.setLocked(locked);
+		case "s":
+			s.setLocked(locked);
+		case "w":
+			w.setLocked(locked);
+		}
+	}
+
+}
