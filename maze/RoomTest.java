@@ -1,4 +1,4 @@
-package mazeUtils;
+package maze;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,9 +1,11 @@
-package mazeUtils;
+package maze;
 
 import static org.junit.Assume.assumeTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import mazeUtils.Question;
 
 class DoorTest {
 

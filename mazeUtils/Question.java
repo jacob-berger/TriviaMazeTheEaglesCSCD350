@@ -12,7 +12,7 @@ public class Question {
 	private String response3;
 	private Connection database;
 
-	protected Question() throws NullPointerException, IllegalArgumentException {
+	public Question() throws NullPointerException, IllegalArgumentException {
 		double random = Math.random();
 		random = random * 3 + 1;
 		int choice = (int) random;

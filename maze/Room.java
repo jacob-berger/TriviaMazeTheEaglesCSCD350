@@ -1,4 +1,4 @@
-package mazeUtils;
+package maze;
 
 public class Room {
 	
@@ -22,6 +22,20 @@ public class Room {
 		this.entrance = entrance;
 		this.exit = exit;
 	}
+	/**
+	 * I'm adding this constructor for now because I think adding the Door obj's as parameters isn't
+	 * necessary. 
+	 * @param entrance
+	 * @param exit
+	 */
+	protected Room(boolean entrance, boolean exit) {
+		n = new Door();
+		e = new Door();
+		s = new Door();
+		w = new Door();
+		this.entrance = entrance;
+		this.exit = exit;
+	}
 	
 	protected boolean getEntrance() {
 		return entrance;
@@ -32,6 +46,7 @@ public class Room {
 	}
 	
 	//Do we need setters for entrance/exit?
+	//Steven: I like that it's done in the constructor call.
 	
 	public String toString() {
 		String result = "";
@@ -57,8 +72,12 @@ public class Room {
 		
 		return n;
 	}
-	
-	protected void setDoor(String direction, boolean locked) {
+	/**
+	 * sets a door specified by direction, locked or unlocked
+	 * @param direction
+	 * @param locked
+	 */
+	protected void setDoor(String direction, boolean locked) { // maybe change direction to char to be consistent with regex
 		switch (direction) {
 		case "n":
 			n.setLocked(locked);

@@ -1,4 +1,4 @@
-package mazeUtils;
+package maze;
 
 public class Player {
 	

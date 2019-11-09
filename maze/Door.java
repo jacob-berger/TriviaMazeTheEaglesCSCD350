@@ -1,4 +1,6 @@
-package mazeUtils;
+package maze;
+
+import mazeUtils.Question;
 
 public class Door {
 	
@@ -21,7 +23,7 @@ public class Door {
 	protected Question getQuestion() {
 		return this.question;
 	}
-	
+	@Override
 	public String toString() {
 		return "Question: " + this.getQuestion() + "\n" + "Answer: " + "\n" + "Locked?" + this.getLocked();
 	}
