@@ -8,12 +8,12 @@ public class Door {
 	private Question question;
 	
 	protected Door() {
-		locked = true;
-		question = new Question();
+		this.locked = false; // should be initialized as false.
+		//question = new Question(); //commented out for testing purposes (Question not working with database issue)
 	}
 	
 	protected boolean getLocked() {
-		return locked;
+		return this.locked;
 	}
 	
 	protected void setLocked(boolean state) {

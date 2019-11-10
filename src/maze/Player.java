@@ -4,7 +4,6 @@ public class Player {
 	
 	protected int[] location;
 	protected String name;
-	protected Maze maze;
 	
 	public Player() {
 		this("Default", new int[] {0,0});
@@ -23,16 +22,20 @@ public class Player {
 		this.location = location;
 	}
 	
-	private void setLocation(int x, int y) {
-		location[0] = x;
-		location[1] = y;
+	public void setLocation(int r, int c) {
+		location[0] = r;
+		location[1] = c;
 	}
 	
-	protected int getX() {
+	public String getName() {
+		return this.name;
+	}
+	
+	protected int getR() {
 		return location[0];
 	}
 	
-	protected int getY() {
+	protected int getC() {
 		return location[1];
 	}
 	
@@ -44,16 +47,16 @@ public class Player {
 	protected void move(String direction) {
 		switch (direction) {
 		case "North":
-			this.setLocation(this.getX() - 1, this.getY());
+			this.setLocation(this.getR() - 1, this.getC());
 			break;
 		case "East": 
-			this.setLocation(this.getX(), this.getY() + 1);
+			this.setLocation(this.getR(), this.getC() + 1);
 			break;
 		case "South": 
-			this.setLocation(this.getX() + 1, this.getY());
+			this.setLocation(this.getR() + 1, this.getC());
 			break;
 		case "West":
-			this.setLocation(this.getX(), this.getY() - 1);
+			this.setLocation(this.getR(), this.getC() - 1);
 		}
 	}
 

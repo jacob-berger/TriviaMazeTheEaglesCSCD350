@@ -29,10 +29,10 @@ public class Room {
 	 * @param exit
 	 */
 	protected Room(boolean entrance, boolean exit) {
-		n = new Door();
-		e = new Door();
-		s = new Door();
-		w = new Door();
+		this.n = new Door();
+		this.e = new Door();
+		this.s = new Door();
+		this.w = new Door();
 		this.entrance = entrance;
 		this.exit = exit;
 	}
@@ -48,12 +48,13 @@ public class Room {
 	//Do we need setters for entrance/exit?
 	//Steven: I like that it's done in the constructor call.
 	
+	
 	public String toString() {
 		String result = "";
 		result += "North: " + ((n.getLocked() == true) ? "Locked" : "Unlocked");
 		result += "\nEast: " + ((e.getLocked() == true) ? "Locked" : "Unlocked");
 		result += "\nSouth: " + ((s.getLocked() == true) ? "Locked" : "Unlocked");
-		result += "\nWest: " + ((w.getLocked() == true) ? "Locked" : "Unlocked");
+		result += "\nWest: " + ((w.getLocked() == true) ? "Locked" : "Unlocked");		
 		
 		return result;
 	}
@@ -81,12 +82,16 @@ public class Room {
 		switch (direction) {
 		case "n":
 			n.setLocked(locked);
+			break;
 		case "e":
 			e.setLocked(locked);
+			break;
 		case "s":
 			s.setLocked(locked);
+			break;
 		case "w":
 			w.setLocked(locked);
+			break;
 		}
 	}
 
