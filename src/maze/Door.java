@@ -30,8 +30,8 @@ public class Door {
 	
 	//Do we need a setter for the Question? Should really only need to be changed when Door is created.
 
-	public static void main(String[] args) {
-		Door door = new Door();
-		System.out.println(door);
-	}
+//	public static void main(String[] args) {
+//		Door door = new Door();
+//		System.out.println(door);
+//	}
 } 
