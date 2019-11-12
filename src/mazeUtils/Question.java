@@ -67,7 +67,7 @@ public class Question {
 
 		try {
 			Class.forName("org.sqlite.JDBC");
-			database = DriverManager.getConnection("jdbc:sqlite:database/trivia.db");
+			database = DriverManager.getConnection("jdbc:sqlite:src/database/trivia.db");
 			Statement statement = database.createStatement();
 
 			//Get total number of questions in table

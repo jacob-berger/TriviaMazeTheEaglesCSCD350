@@ -8,7 +8,7 @@ public class DatabaseTest {
       
       try {
          Class.forName("org.sqlite.JDBC");
-         c = DriverManager.getConnection("jdbc:sqlite:database/trivia.db");
+         c = DriverManager.getConnection("jdbc:sqlite:src/database/trivia.db");
          System.out.println("Opened database successfully");
          statement = c.createStatement();
          ResultSet rs = statement.executeQuery("select * from TRUE_FALSE");

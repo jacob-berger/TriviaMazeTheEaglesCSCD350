@@ -37,7 +37,7 @@ class RoomTest {
 		Room room = new Room();
 		
 		String out = room.toString();
-		String expected = "North: Locked\nEast: Locked\nSouth: Locked\nWest: Locked";
+		String expected = "North: Unlocked\nEast: Unlocked\nSouth: Unlocked\nWest: Unlocked";
 		
 		assertEquals(out, expected);
 	}

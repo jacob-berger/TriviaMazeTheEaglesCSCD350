@@ -13,7 +13,7 @@ class DoorTest {
 	void testDoor() {
 		Door door = new Door();
 		
-		assertTrue(door.getLocked());
+		assertFalse(door.getLocked());
 		assertTrue(door.getQuestion().getClass() == Question.class);
 	}
 
@@ -21,7 +21,7 @@ class DoorTest {
 	void testGetLocked() {
 		Door door = new Door();
 		
-		assertTrue(door.getLocked());
+		assertFalse(door.getLocked());
 	}
 
 	@Test
