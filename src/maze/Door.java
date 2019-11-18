@@ -6,12 +6,22 @@ public class Door {
 	
 	private boolean locked;
 	private Question question;
+	private boolean cheatable;
 	
 	protected Door() {
 		this.locked = false; // should be initialized as false.
 		question = new Question(); //commented out for testing purposes (Question not working with database issue)
+		cheatable = true;
 	}
 	
+	protected boolean isCheatable() {
+		return cheatable;
+	}
+
+	protected void setCheatable(boolean cheatable) {
+		this.cheatable = cheatable;
+	}
+
 	protected boolean getLocked() {
 		return this.locked;
 	}
@@ -29,9 +39,4 @@ public class Door {
 	}
 	
 	//Do we need a setter for the Question? Should really only need to be changed when Door is created.
-
-	public static void main(String[] args) {
-		Door door = new Door();
-		System.out.println(door);
-	}
 } 

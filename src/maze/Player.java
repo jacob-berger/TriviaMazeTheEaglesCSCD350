@@ -44,19 +44,22 @@ public class Player {
 		return (room.getDoor(direction) == null) ? false : !room.getDoor(direction).getLocked();
 	}
 	
-	protected void move(String direction) {
+	protected void move(String direction) throws IllegalArgumentException {
 		switch (direction) {
-		case "North":
+		case "n":
 			this.setLocation(this.getR() - 1, this.getC());
 			break;
-		case "East": 
+		case "e": 
 			this.setLocation(this.getR(), this.getC() + 1);
 			break;
-		case "South": 
+		case "s": 
 			this.setLocation(this.getR() + 1, this.getC());
 			break;
-		case "West":
+		case "w":
 			this.setLocation(this.getR(), this.getC() - 1);
+			break;
+		default:
+			throw new IllegalArgumentException("Invalid direction specified");	
 		}
 	}
 
