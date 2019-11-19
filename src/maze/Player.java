@@ -4,6 +4,7 @@ public class Player {
 	
 	protected int[] location;
 	protected String name;
+	private boolean cheating;
 	
 	public Player() {
 		this("Default", new int[] {0,0});
@@ -27,24 +28,32 @@ public class Player {
 		location[1] = c;
 	}
 	
+	public void setCheating(boolean state) {
+		this.cheating = state;
+	}
+	
 	public String getName() {
 		return this.name;
 	}
 	
-	protected int getR() {
+	public boolean isCheating() {
+		return this.cheating;
+	}
+	
+	public int getR() {
 		return location[0];
 	}
 	
-	protected int getC() {
+	public int getC() {
 		return location[1];
 	}
 	
-	protected boolean canMove(Room room, String direction) {
+	public boolean canMove(Room room, String direction) {
 		//if the door in this direction is unlocked, movement is possible;
 		return (room.getDoor(direction) == null) ? false : !room.getDoor(direction).getLocked();
 	}
 	
-	protected void move(String direction) {
+	public void move(String direction) {
 		switch (direction) {
 		case "North":
 			this.setLocation(this.getR() - 1, this.getC());

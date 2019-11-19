@@ -1,11 +1,14 @@
-package maze;
+package testClasses;
+
+import maze.Maze;
+import maze.Player;
 
 public class MazeTester {
 	
 	public static void main(String[] args) {
 		System.out.println("This is a test of the Maze class.");
-		
-		Maze myMaze = new Maze(4,4);
+		Player player = new Player("Mr. Tester");
+		Maze myMaze = new Maze(4,4, player);
 		
 		System.out.println("Maze Generated.");
 		System.out.println("----------------------------------------");
@@ -37,7 +40,7 @@ public class MazeTester {
 		
 		Player myPlayer = new Player("Mr. Tester");
 		
-		myMaze.setPlayer(myPlayer);
+		myMaze.movePlayer('e');
 		
 		System.out.println("A new player has been created: " + myPlayer.getName());
 		System.out.println("Player location: location: " + "R: " + myPlayer.getR() + " C: " + myPlayer.getC());
@@ -46,6 +49,7 @@ public class MazeTester {
 		System.out.println("Player location: " + "R: " + myPlayer.getR() + " C: " + myPlayer.getC());
 		System.out.println("Is end reachable?" + myMaze.getEndReachable());
 		
+		System.out.println();
 		System.out.println("Player location: " + "R: " + myPlayer.getR() + " C: " + myPlayer.getC());
 		System.out.println("locking current path of doors from both sides:");
 		myMaze.rooms[0][1].setDoor("s", true);
@@ -57,7 +61,13 @@ public class MazeTester {
 		myMaze.rooms[1][2].setDoor("n", true);
 		myMaze.rooms[1][2].setDoor("e", true);
 		myMaze.rooms[2][2].setDoor("e", true);
+		System.out.println();
 		System.out.println("Is end reachable?" + myMaze.getEndReachable());
+		
+		System.out.println();
+		myMaze.rooms[3][2].setDoor("e", true);
+		System.out.println("Is end reachable?" + myMaze.getEndReachable());
+	
 		
 	}
 }
