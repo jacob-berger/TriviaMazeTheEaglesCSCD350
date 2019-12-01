@@ -5,7 +5,7 @@ public class Room {
 	private Door n, e, s, w;
 	private boolean entrance, exit;
 	
-	protected Room() {
+	public Room() {
 		n = new Door();
 		e = new Door();
 		s = new Door();
@@ -14,7 +14,7 @@ public class Room {
 		exit = false;
 	}
 	
-	protected Room(Door north, Door east, Door south, Door west, boolean entrance, boolean exit) {
+	public Room(Door north, Door east, Door south, Door west, boolean entrance, boolean exit) {
 		n = north;
 		e = east;
 		s = south;
@@ -28,7 +28,7 @@ public class Room {
 	 * @param entrance
 	 * @param exit
 	 */
-	protected Room(boolean entrance, boolean exit) {
+	public Room(boolean entrance, boolean exit) {
 		this.n = new Door();
 		this.e = new Door();
 		this.s = new Door();
@@ -37,11 +37,11 @@ public class Room {
 		this.exit = exit;
 	}
 	
-	protected boolean getEntrance() {
+	public boolean getEntrance() {
 		return entrance;
 	}
 	
-	protected boolean getExit() {
+	public boolean getExit() {
 		return exit;
 	}
 	
@@ -59,7 +59,7 @@ public class Room {
 		return result;
 	}
 	
-	protected Door getDoor(String direction) {
+	public Door getDoor(String direction) {
 		switch (direction) {
 		case "n":
 			return n;
@@ -74,11 +74,33 @@ public class Room {
 		return n;
 	}
 	/**
+	 * sets a door specified by direction, to be a wall or not
+	 * @param direction
+	 * @param wall 
+	 */
+	public void setWall(String direction, boolean wall) {
+		switch(direction) {
+			case "n":
+				n.setWall(wall);
+				break;
+			case "e":
+				e.setWall(wall);
+				break;
+			case "s":
+				s.setWall(wall);
+				break;
+			case "w":
+				w.setWall(wall);
+				break;
+		}
+	}
+	
+	/**
 	 * sets a door specified by direction, locked or unlocked
 	 * @param direction
 	 * @param locked
 	 */
-	protected void setDoor(String direction, boolean locked) { // maybe change direction to char to be consistent with regex
+	public void setDoor(String direction, boolean locked) { // maybe change direction to char to be consistent with regex
 		switch (direction) {
 		case "n":
 			n.setLocked(locked);

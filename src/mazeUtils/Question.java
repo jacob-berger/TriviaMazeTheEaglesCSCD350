@@ -38,7 +38,7 @@ public class Question {
 		}
 	}
 
-	protected QuestionType getType() {
+	public QuestionType getType() {
 		return this.type;
 	}
 
@@ -46,7 +46,7 @@ public class Question {
 		this.type = type;
 	}
 
-	protected String getQuestion() {
+	public String getQuestion() {
 		return this.question;
 	}
 
@@ -54,7 +54,7 @@ public class Question {
 		this.question = question;
 	}
 
-	protected String getAnswer() {
+	public String getAnswer() {
 		return this.answer;
 	}
 

@@ -1,6 +1,9 @@
-package mazeUtils;
+package testClasses;
 
-public class tester {
+import mazeUtils.Regex;
+import mazeUtils.ScannerClass;
+
+public class RegexScannerTester {
 	/**REGEX AND SCANNERCLASS TESTER
 	 * Run from this class to put all the regex to the test
 	 * dynamically with your input. 

@@ -1,12 +1,15 @@
 package maze;
 
+import mazeUtils.QuestionHandler;
+
 //test
-public class Maze {
+public class Maze{
 	
 	public Room[][] rooms;
 	private int[] playerLoc = {0, 0}; // {r, c}
 	private Player player;
 	private boolean endReachable = true;
+	private QuestionHandler questionHandler = new QuestionHandler();
 	private int rows;
 	private int columns;
 	
@@ -22,15 +25,17 @@ public class Maze {
 	 * to implement different sizes of Maze. For now a 4x4
 	 * maze will be generated on instantiation. 
 	 */
-	public Maze(int rows, int columns) {
+	public Maze(int rows, int columns, Player player) {
 		this.rows = rows;
 		this.columns = columns;
 		
-		player = new Player();
+		this.player = player;
+		setPlayerLoc(0,0);
+		
 		generateMaze(rows,columns);
 	}
 	
-	public void setPlayer(Player newPlayer) {
+	private void setPlayer(Player newPlayer) { // may not need this
 		this.player = newPlayer;
 	}
 	
@@ -42,20 +47,40 @@ public class Maze {
 		return this.columns;
 	}
 	
+	public boolean didPlayerWin(){
+		if((this.playerLoc[0] == this.rows - 1) && (this.playerLoc[1] == this.columns - 1)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public String getPlayerLoc() {
+		
+		return "Player Location: R: " + this.playerLoc[0] + " C: " + this.playerLoc[1];
+	}
 	/**
 	 * if door is unlocked in specified direction then movement will be 
-	 * allowed and player location is updated. 
+	 * allowed and player location is updated.
 	 * @param direction trying to move
 	 */
 	public void movePlayer(char direction) {
 		int r = this.playerLoc[0];
 		int c = this.playerLoc[1];
 		String directionString = direction + "";
-		
+
 		switch(direction) {
 		case 'n':
 			if(!rooms[r][c].getDoor(directionString).getLocked()) {
-				setPlayerLoc(r - 1, c);
+				if(this.questionHandler.handleQuestion(rooms[r][c].getDoor(directionString))) {
+					System.out.println("CORRECT");
+					System.out.println("Moving north.");
+					setPlayerLoc(r - 1, c);
+				}
+				else {
+					System.out.println("INCORRECT");
+					System.out.println("DOOR: LOCKED");
+					rooms[r][c].getDoor(directionString).setLocked(true);
+				}
 			}
 			else {
 				System.out.println("Door is locked.");
@@ -63,7 +88,17 @@ public class Maze {
 			break;
 		case 'e':
 			if(!rooms[r][c].getDoor(directionString).getLocked()) {
-				setPlayerLoc(r, c + 1);
+				if(this.questionHandler.handleQuestion(rooms[r][c].getDoor(directionString))) {
+					System.out.println("CORRECT");
+					System.out.println("Moving East.");
+					setPlayerLoc(r, c + 1);
+				}
+				else {
+					System.out.println("INCORRECT");
+					System.out.println("DOOR: LOCKED");
+					rooms[r][c].getDoor(directionString).setLocked(true);
+				}
+
 			}
 			else {
 				System.out.println("Door is locked.");
@@ -71,7 +106,17 @@ public class Maze {
 			break;
 		case 's':
 			if(!rooms[r][c].getDoor(directionString).getLocked()) {
-				setPlayerLoc(r + 1, c);
+				if(this.questionHandler.handleQuestion(rooms[r][c].getDoor(directionString))) {
+					System.out.println("CORRECT");
+					System.out.println("Moving South.");
+					setPlayerLoc(r + 1, c);
+				}
+				else {
+					System.out.println("INCORRECT");
+					System.out.println("DOOR: LOCKED");
+					rooms[r][c].getDoor(directionString).setLocked(true);
+				}
+
 			}
 			else {
 				System.out.println("Door is locked.");
@@ -79,14 +124,25 @@ public class Maze {
 			break;
 		case 'w':
 			if(!rooms[r][c].getDoor(directionString).getLocked()) {
-				setPlayerLoc(r, c - 1);
+				if(this.questionHandler.handleQuestion(rooms[r][c].getDoor(directionString))) {
+					System.out.println("CORRECT");
+					System.out.println("Moving West.");
+					setPlayerLoc(r, c - 1);
+				}
+				else {
+					System.out.println("INCORRECT");
+					System.out.println("DOOR: LOCKED");
+					rooms[r][c].getDoor(directionString).setLocked(true);
+				}
+
 			}
 			else {
 				System.out.println("Door is locked.");
 			}
 			break;
 		}
-	
+		System.out.println(getPlayerLoc());
+		System.out.println();
 	}
 	
 	/**
@@ -114,12 +170,16 @@ public class Maze {
 				if(searchR == 0 && searchC == 0) {
 					this.rooms[searchR][searchC] = new Room(false, true);
 					this.rooms[searchR][searchC].setDoor("n", true);
+					this.rooms[searchR][searchC].setWall("n", true);
 					this.rooms[searchR][searchC].setDoor("w", true);
+					this.rooms[searchR][searchC].setWall("w", true);
 				}
 				else if(searchR == rows - 1 && searchC == columns - 1) {
 					this.rooms[searchR][searchC] = new Room(true, false);
 					this.rooms[searchR][searchC].setDoor("s", true);
+					this.rooms[searchR][searchC].setWall("s", true);
 					this.rooms[searchR][searchC].setDoor("e", true);
+					this.rooms[searchR][searchC].setWall("e", true);
 				}
 				else {
 					if(this.rooms[searchR][searchC] == null) {
@@ -127,15 +187,19 @@ public class Maze {
 					}					
 					if(searchR == 0) {
 						this.rooms[searchR][searchC].setDoor("n", true);
+						this.rooms[searchR][searchC].setWall("n", true);
 					}
 					if(searchR == rows - 1) {
 						this.rooms[searchR][searchC].setDoor("s", true);
+						this.rooms[searchR][searchC].setWall("s", true);
 					}
 					if(searchC == 0) {
 						this.rooms[searchR][searchC].setDoor("w", true);
+						this.rooms[searchR][searchC].setWall("w", true);
 					}
 					if(searchC == columns - 1) {
 						rooms[searchR][searchC].setDoor("e", true);
+						rooms[searchR][searchC].setWall("e", true);
 					}
 				}
 			}
@@ -171,7 +235,6 @@ public class Maze {
 			gotEnd = true;
 			return true;
 		}
-		System.out.println("Current Location: " + r + " : " + c); // for testing purposes
 		if((!gotEnd && !rooms[r][c].getDoor("n").getLocked()) && !path[r - 1][c]) {
 			gotEnd = updateEndReachable(gotEnd, path, r - 1, c);
 		}
