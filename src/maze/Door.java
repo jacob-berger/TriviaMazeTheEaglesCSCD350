@@ -4,33 +4,41 @@ import mazeUtils.Question;
 
 public class Door {
 	
+	private boolean wall;
 	private boolean locked;
 	private Question question;
-	private boolean cheatable;
+	private boolean questionAnswered = false;
 	
-	protected Door() {
-		this.locked = false; // should be initialized as false.
-		question = new Question(); //commented out for testing purposes (Question not working with database issue)
-		cheatable = true;
+	public Door() {
+		this.locked = false; 
+		question = new Question();
 	}
 	
-	protected boolean isCheatable() {
-		return cheatable;
-	}
-
-	protected void setCheatable(boolean cheatable) {
-		this.cheatable = cheatable;
-	}
-
-	protected boolean getLocked() {
+	public boolean getLocked() {
 		return this.locked;
 	}
 	
-	protected void setLocked(boolean state) {
+	public boolean getWall() {
+		return this.wall;
+	}
+	
+	public boolean getQuestionAnswered() {
+		return this.questionAnswered;
+	}
+	
+	public void setQuestionAnswered(boolean state) {
+		this.questionAnswered = state;
+	}
+	
+	public void setWall(boolean state) {
+		this.wall = state;
+	}
+	
+	public void setLocked(boolean state) {
 		this.locked = state;
 	}
 	
-	protected Question getQuestion() {
+	public Question getQuestion() {
 		return this.question;
 	}
 	@Override

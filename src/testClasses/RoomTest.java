@@ -1,8 +1,13 @@
-package maze;
+package testClasses;
+import maze.*;
+import mazeUtils.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import maze.Door;
+import maze.Room;
 
 class RoomTest {
 
