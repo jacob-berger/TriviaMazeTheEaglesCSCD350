@@ -24,14 +24,33 @@ public class QuestionHandler {
 	}
 	
 	private boolean askQuestionVarify() {
-		
-		System.out.println(this.questionString);
 		String answer = "";
 		
+		System.out.println("\n\n" + PrintMaze.dungeonMasterDisplaySmile());
+		System.out.println("------MOVIE MASTER:------\n");
+		System.out.println(this.question.toString());
+		//String answer = "**********************This is for testing purposes: ANSWER: " + this.questionAnswer;****************
+		//System.out.println(answer);
 		switch(this.questionType) {
 		case MULTIPLE_CHOICE:
-			answer = this.scan.readChar() + "";  // check against regex ***********************
-			if(answer.equals(this.questionAnswer)) {
+			char correctChoice;
+			char charAnswer = this.scan.readChar();  // check against regex ***********************
+			
+			if(questionAnswer.equals(question.getResponse1())){
+				correctChoice = 'a';
+			}
+			else if(questionAnswer.equals(question.getResponse2())){
+				correctChoice = 'b';
+			}
+			else if(questionAnswer.equals(question.getResponse3())){
+				correctChoice = 'c';
+			}
+			else{
+				correctChoice = 'd';
+			}
+		
+		
+			if(charAnswer == correctChoice) {
 				return true;
 			}
 			break;

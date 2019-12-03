@@ -62,13 +62,13 @@ public class Room {
 	public Door getDoor(String direction) {
 		switch (direction) {
 		case "n":
-			return n;
+			return this.n;
 		case "e":
-			return e;
+			return this.e;
 		case "s":
-			return s;
+			return this.s;
 		case "w":
-			return w;
+			return this.w;
 		}
 		
 		return n;

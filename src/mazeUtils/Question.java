@@ -10,6 +10,7 @@ public class Question {
 	private String response1;
 	private String response2;
 	private String response3;
+	private String response4 = this.answer;// there needs to be another response
 	private Connection database;
 
 	public Question() throws NullPointerException, IllegalArgumentException {
@@ -40,6 +41,18 @@ public class Question {
 
 	public QuestionType getType() {
 		return this.type;
+	}
+	
+	public String getResponse1() {
+		return this.response1;
+	}
+	
+	public String getResponse2() {
+		return this.response2;
+	}
+	
+	public String getResponse3() {
+		return this.response3;
 	}
 
 	private void setType(QuestionType type) {
@@ -98,25 +111,30 @@ public class Question {
 	}
 
 	public String toString() {
-		String result = "";
-//		result += "Type: " + this.getType() + "\n";
-		result += "Question: " + this.getQuestion() + "\n";
+		String result = "\n";
+		//result += "Type: " + this.getType() + "\n";
+		result += "QUESTION: " + this.getQuestion() + "\n";
 
 		switch (this.type.toString()) {
 		case "TRUE_FALSE":
-			result += "True or false?\n";
+			result += "\nTrue or False?\n";
 			break;
 
 		case "MULTIPLE_CHOICE":
 			//Prints in same order every run
-			result += this.response1 + "\n";
-			result += this.response2 + "\n";
-			result += this.response3 + "\n";
-			result += this.answer + "\n";
+			result += "\n";
+			result += "a) " + this.response1 + "\n";
+			result += "b) " + this.response2 + "\n"; // these need to be randomly placed in here
+			result += "c) " + this.response3 + "\n";
+			result += "d) " + this.answer + "\n";
+			break;
+		
+		case "SHORT_ANSWER":
+			
 			break;
 		}
 
-		result += "Type your response: \n";
+		result += "\nType your response: \n";
 		return result;
 	}
 

@@ -1,4 +1,4 @@
-package testClasses;
+package unitTests;
 import maze.*;
 import mazeUtils.*;
 

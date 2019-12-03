@@ -1,6 +1,6 @@
 package maze;
 
-import mazeUtils.QuestionHandler;
+import mazeUtils.*;
 
 //test
 public class Maze{
@@ -34,9 +34,9 @@ public class Maze{
 		
 		generateMaze(rows,columns);
 	}
-	
-	private void setPlayer(Player newPlayer) { // may not need this
-		this.player = newPlayer;
+
+	public String getPlayerName() {
+		return this.player.name;
 	}
 	
 	public int getRows() {
@@ -66,85 +66,56 @@ public class Maze{
 	public void movePlayer(char direction) {
 		int r = this.playerLoc[0];
 		int c = this.playerLoc[1];
+		
 		String directionString = direction + "";
-
-		switch(direction) {
-		case 'n':
-			if(!rooms[r][c].getDoor(directionString).getLocked()) {
+		
+		if(!this.rooms[r][c].getDoor(directionString).getLocked()) {
+			if(!(this.rooms[r][c].getDoor(directionString).getQuestionAnswered())) {
 				if(this.questionHandler.handleQuestion(rooms[r][c].getDoor(directionString))) {
-					System.out.println("CORRECT");
-					System.out.println("Moving north.");
-					setPlayerLoc(r - 1, c);
+					System.out.println("-----CORRECT-----");
+					System.out.println(PrintMaze.dungeonMasterDisplayUnhappy());
+					this.rooms[r][c].getDoor(directionString).setQuestionAnswered(true);
 				}
 				else {
-					System.out.println("INCORRECT");
+					System.out.println("-----INCORRECT-----");
+					System.out.println(PrintMaze.dungeonMasterDisplaySmug());
 					System.out.println("DOOR: LOCKED");
-					rooms[r][c].getDoor(directionString).setLocked(true);
+					this.rooms[r][c].getDoor(directionString).setLocked(true);
 				}
 			}
-			else {
-				System.out.println("Door is locked.");
-			}
-			break;
-		case 'e':
-			if(!rooms[r][c].getDoor(directionString).getLocked()) {
-				if(this.questionHandler.handleQuestion(rooms[r][c].getDoor(directionString))) {
-					System.out.println("CORRECT");
-					System.out.println("Moving East.");
-					setPlayerLoc(r, c + 1);
-				}
-				else {
-					System.out.println("INCORRECT");
-					System.out.println("DOOR: LOCKED");
-					rooms[r][c].getDoor(directionString).setLocked(true);
-				}
-
-			}
-			else {
-				System.out.println("Door is locked.");
-			}
-			break;
-		case 's':
-			if(!rooms[r][c].getDoor(directionString).getLocked()) {
-				if(this.questionHandler.handleQuestion(rooms[r][c].getDoor(directionString))) {
-					System.out.println("CORRECT");
-					System.out.println("Moving South.");
-					setPlayerLoc(r + 1, c);
-				}
-				else {
-					System.out.println("INCORRECT");
-					System.out.println("DOOR: LOCKED");
-					rooms[r][c].getDoor(directionString).setLocked(true);
-				}
-
-			}
-			else {
-				System.out.println("Door is locked.");
-			}
-			break;
-		case 'w':
-			if(!rooms[r][c].getDoor(directionString).getLocked()) {
-				if(this.questionHandler.handleQuestion(rooms[r][c].getDoor(directionString))) {
-					System.out.println("CORRECT");
-					System.out.println("Moving West.");
-					setPlayerLoc(r, c - 1);
-				}
-				else {
-					System.out.println("INCORRECT");
-					System.out.println("DOOR: LOCKED");
-					rooms[r][c].getDoor(directionString).setLocked(true);
-				}
-
-			}
-			else {
-				System.out.println("Door is locked.");
-			}
-			break;
 		}
-		System.out.println(getPlayerLoc());
-		System.out.println();
-	}
-	
+		else {
+			if(this.rooms[r][c].getDoor(directionString).getWall()) {
+				System.out.println("You can't walk through walls.");
+			}
+			else {
+				System.out.println("The Door is locked.");
+			}
+		}
+		if(this.rooms[r][c].getDoor(directionString).getQuestionAnswered()) {
+			switch(direction) {
+			case 'n':
+				System.out.println("Moving north.");
+				setPlayerLoc(r - 1, c);
+				break;
+			case 'e':
+				System.out.println("Moving East.");
+				setPlayerLoc(r, c + 1);
+				break;
+			case 's':
+				System.out.println("Moving South.");
+				setPlayerLoc(r + 1, c);
+				break;
+			case 'w':
+				System.out.println("Moving West.");
+				setPlayerLoc(r, c - 1);
+				break;
+			}
+		}
+		
+		System.out.println("Current Location: " + getPlayerLoc());
+		System.out.print(PrintMaze.displayRoom(this.rooms, this.playerLoc, getRows(), getColumns()));
+	}	
 	/**
 	 * player location is updated in the maze and in the player
 	 * object.
@@ -169,7 +140,7 @@ public class Maze{
 			for(int searchC = 0; searchC < columns; searchC ++) {
 				if(searchR == 0 && searchC == 0) {
 					this.rooms[searchR][searchC] = new Room(false, true);
-					this.rooms[searchR][searchC].setDoor("n", true);
+					this.rooms[searchR][searchC].setDoor("n", true);					
 					this.rooms[searchR][searchC].setWall("n", true);
 					this.rooms[searchR][searchC].setDoor("w", true);
 					this.rooms[searchR][searchC].setWall("w", true);
@@ -256,4 +227,168 @@ public class Maze{
 			return false;
 		}
 	}
+	
+	
+	
+	
+	
+/*
+	private String displayRoom(int row, int col, int[] loc, Room[][] rooms) {
+		String roomString = "";		
+		Room room = rooms[row][col];
+		
+		Door nD = room.getDoor("n");
+		Door eD = room.getDoor("e");
+		Door sD = room.getDoor("s");
+		Door wD = room.getDoor("w");
+
+		
+		if(nD.getWall()) {
+			roomString += "  __________\n";
+			roomString += " |          |\n";
+		}
+		else if(nD.getLocked()) {
+			roomString += "  ___/__\\___\n";
+			roomString += " |     X    |\n";
+		}
+		else if(nD.getQuestionAnswered()) {
+			roomString += "  ___\\  /___\n";
+			roomString += " |          |\n";
+		}
+		else {
+			roomString += "  ___\\  /___\n";
+			roomString += " |          |\n";
+		}
+		
+		
+		
+		if(wD.getWall()) {
+			roomString += " |          ";
+			roomString += eastWall(1, eD);
+			
+			if(row == loc[0] && col == loc[1]) {
+				roomString += " |     P    ";
+				roomString += eastWall(2, eD);
+			}
+			else {
+				roomString += " |          ";
+				roomString += eastWall(2, eD);
+			}
+			roomString += " |          ";
+			roomString += eastWall(3, eD);
+		}		
+		else if(wD.getLocked()) {
+			roomString += " /|          ";
+			roomString += eastWall(1, eD);
+			
+			if(row == loc[0] && col == loc[1]) {
+				roomString += " X     P    ";
+				roomString += eastWall(2, eD);
+			}
+			else {
+				roomString += " X          ";
+				roomString += eastWall(2, eD);
+			}
+			roomString += "\\|          ";
+			roomString += eastWall(3, eD);
+		}	
+		else if(wD.getQuestionAnswered()) {
+			roomString += "\\|          ";
+			roomString += eastWall(1, eD);
+			
+			if(row == loc[0] && col == loc[1]) {
+				roomString += "       P    ";
+				roomString += eastWall(2, eD);
+			}
+			else {
+				roomString += "            ";
+				roomString += eastWall(2, eD);
+			}
+			roomString += "/|          ";
+			roomString += eastWall(3, eD);
+		}
+		else {
+			roomString += "\\|          ";
+			roomString += eastWall(1, eD);
+			
+			if(row == loc[0] && col == loc[1]) {
+				roomString += " |     P    ";
+				roomString += eastWall(2, eD);
+			}
+			else {
+				roomString += " |          ";
+				roomString += eastWall(2, eD);
+			}
+			roomString += "/|          ";
+			roomString += eastWall(3, eD);
+		}
+		
+		if(sD.getWall()) {
+			roomString += " |__________|";
+		}
+		else if(sD.getLocked()) {
+			roomString += " |_____X____|\n";
+			roomString += "     \\ /";
+		}
+		else if(sD.getQuestionAnswered()) {
+			roomString += " |____  ____|\n";
+			roomString += "     /  \\";
+			
+		}
+		else {
+			roomString += " |__________|\n";
+			roomString += "     /  \\";
+		}
+		
+		return roomString;
+	}
+	
+	private String eastWall(int wallNum, Door eD) {
+		String room = "";
+		
+		if(eD.getWall()) {
+			room += "|\n";
+		}
+		else if(eD.getLocked()) {
+			switch(wallNum) {
+			case 1:
+				room += "|\\\n";
+				break;
+			case 2:
+				room += "X\n";
+				break;
+			case 3:
+				room += "|/\n";
+				break;
+			}
+		}
+		else if(eD.getQuestionAnswered()) {
+			switch(wallNum) {
+			case 1:
+				room += "|/\n";
+				break;
+			case 2:
+				room += "\n";
+				break;
+			case 3:
+				room += "|\\\n";
+				break;
+			}
+		}
+		else {
+			switch(wallNum) {
+			case 1:
+				room += "|/\n";
+				break;
+			case 2:
+				room += "|\n";
+				break;
+			case 3:
+				room += "|\\\n";
+				break;
+			}
+		}
+	
+		return room;
+	}	*/	
 }
