@@ -1,6 +1,9 @@
 package mazeUtils;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Question {
 
@@ -11,6 +14,7 @@ public class Question {
 	private String response2;
 	private String response3;
 	private String response4 = this.answer;// there needs to be another response
+	private List<String> responseList;
 	private Connection database;
 
 	public Question() throws NullPointerException, IllegalArgumentException {
@@ -74,6 +78,10 @@ public class Question {
 	private void setAnswer(String answer) {
 		this.answer = answer;
 	}
+	
+	public List<String> getResponseList() {
+		return this.responseList;
+	}
 
 	private ArrayList<String> retrieveQuestion(QuestionType type) {
 		ArrayList<String> results = new ArrayList<String>();
@@ -121,12 +129,16 @@ public class Question {
 			break;
 
 		case "MULTIPLE_CHOICE":
-			//Prints in same order every run
+			
+			String[] responses = {response1, response2, response3, answer};
+			this.responseList = Arrays.asList(responses);
+			Collections.shuffle(responseList);
+			
 			result += "\n";
-			result += "a) " + this.response1 + "\n";
-			result += "b) " + this.response2 + "\n"; // these need to be randomly placed in here
-			result += "c) " + this.response3 + "\n";
-			result += "d) " + this.answer + "\n";
+			result += "a) " + responseList.get(0) + "\n";
+			result += "b) " + responseList.get(1) + "\n";
+			result += "c) " + responseList.get(2) + "\n";
+			result += "d) " + responseList.get(3) + "\n";
 			break;
 		
 		case "SHORT_ANSWER":

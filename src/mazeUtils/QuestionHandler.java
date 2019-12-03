@@ -36,13 +36,13 @@ public class QuestionHandler {
 			char correctChoice;
 			char charAnswer = this.scan.readChar();  // check against regex ***********************
 			
-			if(questionAnswer.equals(question.getResponse1())){
+			if(questionAnswer.equals(question.getResponseList().get(0))){
 				correctChoice = 'a';
 			}
-			else if(questionAnswer.equals(question.getResponse2())){
+			else if(questionAnswer.equals(question.getResponseList().get(1))){
 				correctChoice = 'b';
 			}
-			else if(questionAnswer.equals(question.getResponse3())){
+			else if(questionAnswer.equals(question.getResponseList().get(2))){
 				correctChoice = 'c';
 			}
 			else{
