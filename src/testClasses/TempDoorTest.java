@@ -1,5 +1,6 @@
-package maze;
+package testClasses;
 
+import maze.Door;
 import mazeUtils.Question;
 
 public class TempDoorTest {

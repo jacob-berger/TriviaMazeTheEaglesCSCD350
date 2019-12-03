@@ -1,4 +1,4 @@
-package mazeUtils;
+package testClasses;
 import java.sql.*;
 
 public class DatabaseTest {

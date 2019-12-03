@@ -29,6 +29,12 @@ public class ScannerClass {
 		return tempString;
 	}
 	
+	public void readNewLine() {
+		initScanner();
+	
+		String tempString = this.fin.nextLine();
+	}
+	
 	/**
 	 * readChar() reads in value as string first, iterates
 	 * past any white space then returns the char at the 
