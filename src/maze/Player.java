@@ -1,7 +1,13 @@
 package maze;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3644493377540918896L;
 	protected int[] location;
 	protected String name;
 	private boolean cheating;

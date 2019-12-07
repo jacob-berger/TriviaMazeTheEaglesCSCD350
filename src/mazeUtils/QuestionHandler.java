@@ -1,8 +1,15 @@
 package mazeUtils;
 
+import java.io.Serializable;
+
 import maze.Door;
 
-public class QuestionHandler {
+public class QuestionHandler implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7472735019465552886L;
+
 	private ScannerClass scan = new ScannerClass();
 	
 	private Question question;

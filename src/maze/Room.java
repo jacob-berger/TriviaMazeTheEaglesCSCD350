@@ -1,7 +1,13 @@
 package maze;
 
-public class Room {
+import java.io.Serializable;
+
+public class Room implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2199267316781365331L;
 	private Door n, e, s, w;
 	private boolean entrance, exit;
 	

@@ -1,12 +1,17 @@
 package mazeUtils;
+import java.io.Serializable;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class Question {
+public class Question implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8918590939245895065L;
 	private QuestionType type;
 	private String question;
 	private String answer;
@@ -15,7 +20,7 @@ public class Question {
 	private String response3;
 	private String response4 = this.answer;// there needs to be another response
 	private List<String> responseList;
-	private Connection database;
+	private transient Connection database;
 
 	public Question() throws NullPointerException, IllegalArgumentException {
 		double random = Math.random();

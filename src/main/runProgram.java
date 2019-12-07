@@ -1,33 +1,39 @@
 package main;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import maze.*;
 import mazeUtils.*;
 
 public class runProgram {
 
+	/**
+	 * 
+	 */
 	private Maze myMaze;
 	private ScannerClass scan = new ScannerClass();
+	private boolean load = false;
+	private boolean loadFailed = false;
 	
-	public runProgram() {
-		/*
-		System.out.println(PrintMaze.dungeonMasterDisplay());
-		System.out.println(PrintMaze.dungeonMasterDisplaySmile());
-		System.out.println(PrintMaze.dungeonMasterDisplaySmug());
-		System.out.println(PrintMaze.dungeonMasterDisplayUnhappy());
-		System.out.println(PrintMaze.dungeonMasterDisplayWon());
-		System.out.println(PrintMaze.dungeonMasterDisplayDeath());
-		System.out.println(PrintMaze.deathDisplay());
-		System.out.println(PrintMaze.dungeonMasterDisplayBack());*/
+	public void setLoad(boolean condition) {
+		this.load = condition;
+	}
+	
+	public runProgram(boolean load) {
+		this.setLoad(load);
 		
-		Player player = new Player(promptName()); // run against regex ************************************
-		myMaze = new Maze(4,4, player);
-		int[] loc = {0,0};
-		
-		System.out.println("");
-		System.out.println(player.getName() + " entered the maze...");
-		System.out.println("");
-		
-		System.out.println(PrintMaze.displayRoom(myMaze.rooms, loc, myMaze.getRows(), myMaze.getColumns()));
-		
+		if (!load) {
+			Player player = new Player(promptName()); // run against regex ************************************
+			myMaze = new Maze(4, 4, player);
+			int[] loc = { 0, 0 };
+			System.out.println("");
+			System.out.println(player.getName() + " entered the maze...");
+			System.out.println("");
+			System.out.println(PrintMaze.displayRoom(myMaze.rooms, loc, myMaze.getRows(), myMaze.getColumns()));
+		}
 		run();
 	}
 	
@@ -35,27 +41,54 @@ public class runProgram {
 		int choice = 0;
 		boolean quit = false;
 		
-		do {
+
+		if (load) {
+			
+			//Loading
+			try {
+				FileInputStream file = new FileInputStream("savegame");
+				ObjectInputStream in = new ObjectInputStream(file);
+				
+				//Method
+				Maze loadedMaze = null;
+				loadedMaze = (Maze)in.readObject();
+				
+				in.close();
+				file.close();
+				myMaze = loadedMaze;
+				
+				System.out.println("Your previous adventure has been loaded.");
+				System.out.println("Good luck...");
+			} catch (IOException e) {
+				System.out.println("Could not find a saved game.");
+				this.load = false;
+				this.loadFailed = true;
+			} catch (Exception e) {
+				System.out.println("Some other exception has occurred. Sorry =(");
+			}
+		}
+		
+		if (!loadFailed) {
+			do {
 				System.out.println("Press Enter:");
 				this.scan.readNewLine();// run against regex **********************************
 				menu();
 				choice = this.scan.readInt(); // run against regex ********************************
 				quit = menuSwitch(choice);
-			
-		}while(!quit && this.myMaze.getEndReachable() && !this.myMaze.didPlayerWin());
-		
-		if(this.myMaze.didPlayerWin()) {
-			won();
-		}
-		else if(!this.myMaze.getEndReachable()) {
-			System.out.println(PrintMaze.dungeonMasterDisplayDeath());
-			System.out.println("Oh no! It appears you can no longer reach the end...");
-			System.out.println(myMaze.getPlayerName() + "'s fate...");
-			System.out.println(PrintMaze.deathDisplay());
-			System.out.println("\n-----------GAME OVER.-----------\n");
+
+			} while (!quit && this.myMaze.getEndReachable() && !this.myMaze.didPlayerWin());
+			if (this.myMaze.didPlayerWin()) {
+				won();
+			} else if (!this.myMaze.getEndReachable()) {
+				System.out.println(PrintMaze.dungeonMasterDisplayDeath());
+				System.out.println("Oh no! It appears you can no longer reach the end...");
+				System.out.println(myMaze.getPlayerName() + "'s fate...");
+				System.out.println(PrintMaze.deathDisplay());
+				System.out.println("\n-----------GAME OVER.-----------\n");
+			} 
 		}
 	}
-	
+
 	private String promptName() {
 		System.out.println("What is your name?: ");
 		return this.scan.readString();
@@ -67,7 +100,8 @@ public class runProgram {
 		System.out.println("            ---------WHAT WOULD YOU LIKE TO DO?---------");
 		System.out.println("1) Move");
 		System.out.println("2) Use Item");
-		System.out.println("3) Quit");
+		System.out.println("3) Save");
+		System.out.println("4) Quit");
 		System.out.println("9) Cheat");
 		
 	}
@@ -102,15 +136,39 @@ public class runProgram {
 		case 2:
 			break;
 		case 3:
+			save(myMaze);
+		case 4:
 			System.out.println("Quitting...");
 			return true;
-		case 4:
-			break;
-		case 5:
-			break;
 		}
 		return false;
 	}
+	private void save(Maze myMaze2) {
+
+		// Serialization  
+        try
+        {    
+            //Saving of object in a file 
+            FileOutputStream file = new FileOutputStream("savegame"); 
+            ObjectOutputStream out = new ObjectOutputStream(file); 
+              
+            // Method for serialization of object 
+            out.writeObject(myMaze2); 
+              
+            out.close(); 
+            file.close(); 
+              
+            System.out.println("Object should have been serialized (fingers crossed)"); 
+  
+        } 
+          
+        catch(Exception e) 
+        { 
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+	}
+
 	/**
 	 * menu2Switch() is the switch associated with menu2(), meaning it is called
 	 * after menu2() is displayed and the player enters a choice.
