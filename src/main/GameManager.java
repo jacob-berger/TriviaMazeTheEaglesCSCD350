@@ -23,7 +23,8 @@ public class GameManager {
 		System.out.println("1) Play Game");
 		System.out.println("2) Load Game");
 		System.out.println("3) Game Instructions");
-		System.out.println("4) Quit");
+		System.out.println("4) Add a question to the database");
+		System.out.println("5) Quit");
 	}
 	
 	public static void startSwitch(int choice) {
@@ -48,6 +49,9 @@ public class GameManager {
 			System.out.println("\n------------------INSTRUCTIONS--------------------");
 			System.out.println("Insert game directions here:");
 			System.out.println("");
+			break;
+		case 4:
+			Question.createQuestion();
 			break;
 		default:
 			
