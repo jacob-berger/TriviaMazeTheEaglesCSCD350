@@ -16,6 +16,7 @@ public class runProgram {
 	private Maze myMaze;
 	private ScannerClass scan = new ScannerClass();
 	private boolean load = false;
+	private boolean loadFailed = false;
 	
 	public void setLoad(boolean condition) {
 		this.load = condition;
@@ -44,9 +45,8 @@ public class runProgram {
 		if (load) {
 			
 			//Loading
-			//Deserialization
 			try {
-				FileInputStream file = new FileInputStream("savegame.txt");
+				FileInputStream file = new FileInputStream("savegame");
 				ObjectInputStream in = new ObjectInputStream(file);
 				
 				//Method
@@ -57,35 +57,38 @@ public class runProgram {
 				file.close();
 				myMaze = loadedMaze;
 				
-				System.out.println("Maze should have been loaded (fingers crossed)");
+				System.out.println("Your previous adventure has been loaded.");
+				System.out.println("Good luck...");
 			} catch (IOException e) {
-				System.out.println("IOException");
-			} catch (ClassNotFoundException e) {
-				System.out.println("ClassNotFoundException");
+				System.out.println("Could not find a saved game.");
+				this.load = false;
+				this.loadFailed = true;
+			} catch (Exception e) {
+				System.out.println("Some other exception has occurred. Sorry =(");
 			}
 		}
 		
-		do {
+		if (!loadFailed) {
+			do {
 				System.out.println("Press Enter:");
 				this.scan.readNewLine();// run against regex **********************************
 				menu();
 				choice = this.scan.readInt(); // run against regex ********************************
 				quit = menuSwitch(choice);
-			
-		}while(!quit && this.myMaze.getEndReachable() && !this.myMaze.didPlayerWin());
-		
-		if(this.myMaze.didPlayerWin()) {
-			won();
-		}
-		else if(!this.myMaze.getEndReachable()) {
-			System.out.println(PrintMaze.dungeonMasterDisplayDeath());
-			System.out.println("Oh no! It appears you can no longer reach the end...");
-			System.out.println(myMaze.getPlayerName() + "'s fate...");
-			System.out.println(PrintMaze.deathDisplay());
-			System.out.println("\n-----------GAME OVER.-----------\n");
+
+			} while (!quit && this.myMaze.getEndReachable() && !this.myMaze.didPlayerWin());
+			if (this.myMaze.didPlayerWin()) {
+				won();
+			} else if (!this.myMaze.getEndReachable()) {
+				System.out.println(PrintMaze.dungeonMasterDisplayDeath());
+				System.out.println("Oh no! It appears you can no longer reach the end...");
+				System.out.println(myMaze.getPlayerName() + "'s fate...");
+				System.out.println(PrintMaze.deathDisplay());
+				System.out.println("\n-----------GAME OVER.-----------\n");
+			} 
 		}
 	}
-	
+
 	private String promptName() {
 		System.out.println("What is your name?: ");
 		return this.scan.readString();
@@ -137,8 +140,6 @@ public class runProgram {
 		case 4:
 			System.out.println("Quitting...");
 			return true;
-		case 5:
-			break;
 		}
 		return false;
 	}

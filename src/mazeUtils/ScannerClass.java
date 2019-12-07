@@ -8,7 +8,7 @@ public class ScannerClass implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 647266378663692657L;
-	private Scanner fin = null;
+	private transient Scanner fin = null;
 	
 	private void initScanner() {
 		if(this.fin == null) {

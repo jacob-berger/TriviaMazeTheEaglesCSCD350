@@ -41,10 +41,8 @@ public class GameManager {
 			
 			break;
 		case 2:
-			
-			game = new runProgram(true);
 			System.out.println("Loading game...");
-//			System.out.println("Insert functionality to load game here:");
+			game = new runProgram(true);
 			break;
 		case 3:
 			System.out.println("\n------------------INSTRUCTIONS--------------------");
