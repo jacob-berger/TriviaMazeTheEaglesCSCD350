@@ -24,7 +24,7 @@ public class Question implements Serializable{
 
 	public Question() {
 		double random = Math.random();
-		random = random * 4;
+		random = random * 3 + 1;
 		int choice = (int) random;
 		switch (choice) {
 		case 1:
