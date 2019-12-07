@@ -52,6 +52,7 @@ public class GameManager {
 			break;
 		case 4:
 			Question.createQuestion();
+			break;
 		default:
 			
 			System.out.println("---------QUITTING--------\n");
