@@ -1,9 +1,15 @@
 package maze;
 
+import java.io.Serializable;
+
 import mazeUtils.Question;
 
-public class Door {
+public class Door implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2656611623936554801L;
 	private boolean wall;
 	private boolean locked;
 	private Question question;

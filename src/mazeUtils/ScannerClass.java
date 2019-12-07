@@ -1,8 +1,13 @@
 package mazeUtils;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class ScannerClass {
+public class ScannerClass implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 647266378663692657L;
 	private Scanner fin = null;
 	
 	private void initScanner() {

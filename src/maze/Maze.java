@@ -1,10 +1,16 @@
 package maze;
 
+import java.io.Serializable;
+
 import mazeUtils.*;
 
 //test
-public class Maze{
+public class Maze implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7709516341468565169L;
 	public Room[][] rooms;
 	private int[] playerLoc = {0, 0}; // {r, c}
 	private Player player;

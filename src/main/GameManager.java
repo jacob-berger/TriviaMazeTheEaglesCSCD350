@@ -37,11 +37,14 @@ public class GameManager {
 			System.out.println("GOOOOD LUCK!!");
 			System.out.println("");
 			
-			runProgram game = new runProgram();
+			runProgram game = new runProgram(false);
 			
 			break;
 		case 2:
-			System.out.println("Insert functionality to load game here:");
+			
+			game = new runProgram(true);
+			System.out.println("Loading game...");
+//			System.out.println("Insert functionality to load game here:");
 			break;
 		case 3:
 			System.out.println("\n------------------INSTRUCTIONS--------------------");
