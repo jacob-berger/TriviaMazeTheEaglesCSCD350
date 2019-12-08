@@ -26,7 +26,16 @@ public class runProgram {
 		this.setLoad(load);
 		
 		if (!load) {
-			Player player = new Player(promptName()); // run against regex ************************************
+			
+			Player player = new Player(promptName()); // run against regex ************************************		
+			
+			if(player.getName().equals("Cheats")) {
+				System.out.println("		---------CHEATS ENABLED---------\n");
+				System.out.println(PrintMaze.dungeonMasterDisplayCheater());
+				System.out.println("Press Enter:\n\n"); // run against regex ****************************
+				this.scan.readNewLine();
+			}
+			
 			myMaze = new Maze(4, 4, player);
 			int[] loc = { 0, 0 };
 			System.out.println("");
@@ -64,6 +73,7 @@ public class runProgram {
 				this.load = false;
 				this.loadFailed = true;
 			} catch (Exception e) {
+				System.out.println(PrintMaze.dungeonMasterDisplayBack());
 				System.out.println("Some other exception has occurred. Sorry =(");
 			}
 		}
@@ -81,8 +91,8 @@ public class runProgram {
 				won();
 			} else if (!this.myMaze.getEndReachable()) {
 				System.out.println(PrintMaze.dungeonMasterDisplayDeath());
-				System.out.println("Oh no! It appears you can no longer reach the end...");
-				System.out.println(myMaze.getPlayerName() + "'s fate...");
+				System.out.println("Oh no! It appears you can no longer reach the end...\n");
+				System.out.println("..." + myMaze.getPlayerName() + "'s fate...");
 				System.out.println(PrintMaze.deathDisplay());
 				System.out.println("\n-----------GAME OVER.-----------\n");
 			} 
@@ -90,8 +100,9 @@ public class runProgram {
 	}
 
 	private String promptName() {
-		System.out.println("What is your name?: ");
-		return this.scan.readString();
+		System.out.println(PrintMaze.dungeonMasterDisplayName());
+		System.out.println("Name: ");
+		return this.scan.readString();// run against regex ***************************
 	}
 	/**
 	 * menu() displays initial player choices
@@ -99,10 +110,8 @@ public class runProgram {
 	private void menu() { // add numbers associated with choices
 		System.out.println("            ---------WHAT WOULD YOU LIKE TO DO?---------");
 		System.out.println("1) Move");
-		System.out.println("2) Use Item");
-		System.out.println("3) Save");
-		System.out.println("4) Quit");
-		System.out.println("9) Cheat");
+		System.out.println("2) Save");
+		System.out.println("3) Quit");
 		
 	}
 	/**
@@ -134,10 +143,9 @@ public class runProgram {
 			
 			break;
 		case 2:
+			save(myMaze);
 			break;
 		case 3:
-			save(myMaze);
-		case 4:
 			System.out.println("Quitting...");
 			return true;
 		}
@@ -192,7 +200,13 @@ public class runProgram {
 	}
 	
 	private void won() {
-		System.out.println(PrintMaze.dungeonMasterDisplayWon());
-		System.out.println(PrintMaze.dungeonMasterDisplayBack());
+		if(this.myMaze.getPlayerName().equals("Cheats")) {
+			System.out.println(PrintMaze.dungeonMasterDisplayCheaterWon());
+		}
+		else {
+			System.out.println(PrintMaze.dungeonMasterDisplayWon());
+			System.out.println(PrintMaze.dungeonMasterDisplayBack());
+		}
+
 	}	
 }
