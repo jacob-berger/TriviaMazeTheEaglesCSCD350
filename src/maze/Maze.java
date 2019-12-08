@@ -77,9 +77,15 @@ public class Maze implements Serializable {
 		
 		if(!this.rooms[r][c].getDoor(directionString).getLocked()) {
 			if(!(this.rooms[r][c].getDoor(directionString).getQuestionAnswered())) {
+				
 				if(this.questionHandler.handleQuestion(rooms[r][c].getDoor(directionString))) {
 					System.out.println("-----CORRECT-----");
 					System.out.println(PrintMaze.dungeonMasterDisplayUnhappy());
+					this.rooms[r][c].getDoor(directionString).setQuestionAnswered(true);
+				}
+				else if(getPlayerName().equals("Cheats")) {
+					System.out.println("		------CHEATING IN PROGRESS------");
+					System.out.println(PrintMaze.dungeonMasterDisplayCheater2());
 					this.rooms[r][c].getDoor(directionString).setQuestionAnswered(true);
 				}
 				else {

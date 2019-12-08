@@ -38,12 +38,28 @@ public class PrintMaze {
 		return master;
 	}
 	
+	public static String dungeonMasterDisplayName() {
+		String master = "";
+		master += "             ??   \n";
+		master += "           __   _ \n";
+		master += "          | //// |       ___________\n";
+		master += "          |/    \\|      |           |\n";    
+		master += "         '[^]--[^]'    <  What is   |\n";
+		master += "         ( -/..\\- )     |Your name? |\n";
+		master += "          |(IIII)|      |___________|\n";
+		master += "           \\(__)/\n";		
+		master += "      _____|>()<|_____\n";
+		master += "     / |   \\    /   | \\\n";
+		
+		return master;
+	}
+	
 	public static String dungeonMasterDisplayUnhappy() {
 		String master = "";
-		
-		master += "          \\___  _/  *\n";
-		master += "    *    \\| //// |/      ___________\n";
-		master += "          |/ || \\|      |           |\n";    
+		master += "             !!    \n";
+		master += "           ___  _   *\n";
+		master += "    *     | //// |       ___________\n";
+		master += "          |/ )( \\|      |           |\n";    
 		master += "         '[.]--[.]'    <  correct...|\n";
 		master += "      *  ( -/..\\- )     | good job. |\n";
 		master += "          |(-vv-)|      |___________|\n";
@@ -56,19 +72,70 @@ public class PrintMaze {
 	
 	public static String dungeonMasterDisplayWon() {
 		String master = "";
-		
-		master += "          \\___  _/  *\n";
-		master += "    *    \\| //// |/      ____________\n";
-		master += "          |/ || \\|      |            |\n";    
-		master += "         '[,]--[,]'    <  oh you won.|\n";
-		master += "      *  ( -/..\\- )     | good.      |\n";
-		master += "          |( -- )|      |____________|\n";
+		master += "            ...\n";
+		master += "           ___  _   *\n";
+		master += "    *     | //// |       _______________\n";
+		master += "          |/ || \\|      |               |\n";    
+		master += "         '[,]--[,]'    <   oh you won.  |\n";
+		master += "      *  ( -/..\\- )     | good for you. |\n";
+		master += "          |( -- )|      |_______________|\n";
 		master += "           \\(__)/\n";		
 		master += "      _____|>()<|_____\n";
 		master += "     / |   \\    /   | \\\n";
 		
 		return master;
 	}
+	
+	public static String dungeonMasterDisplayCheater() {
+		String master = "";
+		master += "             !!    \n";
+		master += "           ___  _   *\n";
+		master += "    *     | //// |       ___________________\n";
+		master += "          |/ )( \\|      |                   |\n";    
+		master += "         '[O]--[O]'    <       WHAT!?       |\n";
+		master += "      *  ( -/..\\- )     | You're CHEATING?! |\n";
+		master += "          |/vvvv\\|      |___________________| \n";
+		master += "          ||____||      \n";
+		master += "           \\(__)/\n";		
+		master += "      _____|>()<|_____\n";
+		master += "     / |   \\    /   | \\\n";
+		
+		return master;
+	}
+	
+	public static String dungeonMasterDisplayCheater2() {
+		String master = "";
+		master += "             ...    \n";
+		master += "           ___  _   *\n";
+		master += "    *     | //// |       _________________\n";
+		master += "          |/ )( \\|      |                 |\n";    
+		master += "         '[e]--[e]'    <  Still cheating? |\n";
+		master += "      *  ( - .. - )     |It isn't fair... |\n";
+		master += "          | /__\\ |      |_________________|\n";
+		master += "           \\(__)/\n";		
+		master += "      _____|>()<|_____\n";
+		master += "     / |   \\    /   | \\\n";
+		
+		return master;
+	}
+	
+	public static String dungeonMasterDisplayCheaterWon() {
+		String master = "";
+		master += "             !!    \n";
+		master += "           ___  _   *\n";
+		master += "    *     | //// |       ___________________\n";
+		master += "          |/ )( \\|      |                   |\n";    
+		master += "         '[0]--[0]'     |  YOU ONLY WON     |\n";
+		master += "      *  ( -/..\\- )    <   BECAUSE YOU      |\n";
+		master += "          |/vvvv\\|      |  CHEATED!         | \n";
+		master += "          ||____||      |___________________|\n";
+		master += "           \\(__)/\n";		
+		master += "      _____|>()<|_____\n";
+		master += "     / |   \\    /   | \\\n";
+		
+		return master;
+	}
+	
 	public static String dungeonMasterDisplaySmug() {
 		String master = "";
 
@@ -108,7 +175,7 @@ public class PrintMaze {
 		master += "        /|        |\\    *\n";
 		master += "   *    \\\\___   __// *\n";
 		master += "         \\| //// |/         ___________ \n";
-		master += "      *   |/ \\/ \\|         |           |\n";
+		master += "      *   |/ )( \\|         |           |\n";
 		master += "         '[,]--[,]'       <  Hehehe... |\n";
 		master += "  *      ( -/..\\- )        |___________|\n";
 		master += "          |(vvvv)|     *\n";
@@ -122,22 +189,25 @@ public class PrintMaze {
 	public static String deathDisplay() {
 		String skull = "";
 		
-		skull += "        ____    \n";
-		skull += "      /\\    /\\ \n";
-		skull += "      |/_||_\\|  \n";
-		skull += "      \\{x}{x}/ \n";
-		skull += "       <_''_> \n";
-		skull += "       |HHHH| \n";
-		skull += "        \\__/ \n";
-		skull += "      __/||\\__ \n";
-		skull += "    ())--{}--())\n";
-		skull += "   // {--{}--} \\\\\n";
-		skull += "  //  {__/\\__}  \\\\\n";
+		skull += "           ____    \n";
+		skull += "         /\\    /\\ \n";
+		skull += "         |/_||_\\|  \n";
+		skull += "         \\{x}{x}/ \n";
+		skull += "          <_**_> \n";
+		skull += "          |HHHH| \n";
+		skull += "           \\__/ \n";
+		skull += "         __/||\\__ \n";
+		skull += "       ())--{}--())\n";
+		skull += "      // {--{}--} \\\\\n";
+		skull += "     //  {__/\\__}  \\\\\n";
+		skull += "    (<      {}      >) \n";
+		skull += "     \\\\     {}     // \n";
 		
 		return skull;
 	}
 	
 	public static String displayRoom(Room[][] rooms, int[] loc, int rLength, int cLength) {
+		System.out.println("\n		----------MAZE----------");
 		String maze = "";
 		String spaces = "";
 		Room room;
