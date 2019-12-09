@@ -2,7 +2,8 @@ package maze;
 
 import java.io.Serializable;
 
-import mazeUtils.*;
+import mazeUtils.PrintMaze;
+import mazeUtils.QuestionHandler;
 
 //test
 public class Maze implements Serializable {
@@ -132,7 +133,7 @@ public class Maze implements Serializable {
 	 * player location is updated in the maze and in the player
 	 * object.
 	 */
-	private void setPlayerLoc(int r, int c) { // location needs to be varified
+	public void setPlayerLoc(int r, int c) { // location needs to be varified
 		this.playerLoc[0] = r;
 		this.playerLoc[1] = c;
 		
@@ -145,7 +146,7 @@ public class Maze implements Serializable {
 	 * @param rows
 	 * @param columns
 	 */
-	private void generateMaze(int rows, int columns) {
+	public void generateMaze(int rows, int columns) {
 		this.rooms = new Room[rows][columns];
 		
 		for(int searchR = 0; searchR < rows; searchR ++) {
@@ -204,6 +205,7 @@ public class Maze implements Serializable {
 		
 		return this.endReachable;
 	}
+	
 	/**
 	 * 
 	 * @param path is a 2d array keeping track of rooms visited while trying to find path

@@ -11,8 +11,8 @@ public class Regex {
 	private String multChoice = "[abcd]{1}"; // a - d
 	private String trueFalse = "[t|f|T|F]{1}"; // t / f
 	private String shortAnswer = "[a-zA-Z ]{3,15}"; // no more than 15 (chars &| spaces)
-	private String direction = "[nsew]{1}"; // n,s,e,w
-	private String yesNo = "\\b(yes|no|y|n)\\b"; // yes, no, y, n
+	private String direction = "[nsewNSEW]{1}"; // n,s,e,w
+	private String yesNo = "\\b(Yes|No|yes|no|y|n)\\b"; // yes, no, y, n
 	private String menuChoice = "[1-9]"; // 1-9
 	
 	/*
