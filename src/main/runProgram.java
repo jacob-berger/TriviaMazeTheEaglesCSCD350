@@ -166,7 +166,7 @@ public class runProgram {
             out.close(); 
             file.close(); 
               
-            System.out.println("Object should have been serialized (fingers crossed)"); 
+            System.out.println("Game state has been saved!"); 
   
         } 
           
