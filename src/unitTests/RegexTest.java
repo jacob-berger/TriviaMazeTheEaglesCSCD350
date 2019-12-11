@@ -83,14 +83,14 @@ public class RegexTest {
 
 	@Test
 	public void testMenuChoice() {
-		assertTrue(regex.menuChoice("1")) ;
-		assertTrue(regex.menuChoice("2")) ;
-		assertTrue(regex.menuChoice("4")) ;
-		assertTrue(regex.menuChoice("6")) ;
-		assertTrue(regex.menuChoice("9")) ;
-		assertFalse(regex.menuChoice("0")) ;
-		assertFalse(regex.menuChoice("10")) ;
-		assertFalse(regex.menuChoice("One")) ;
+		assertTrue(regex.menuChoice3("1")) ;
+		assertTrue(regex.menuChoice3("2")) ;
+		assertTrue(regex.menuChoice3("3")) ;
+		assertFalse(regex.menuChoice3("6")) ;
+		assertFalse(regex.menuChoice3("9")) ;
+		assertFalse(regex.menuChoice3("0")) ;
+		assertFalse(regex.menuChoice3("10")) ;
+		assertFalse(regex.menuChoice3("One")) ;
 	
 	}
 

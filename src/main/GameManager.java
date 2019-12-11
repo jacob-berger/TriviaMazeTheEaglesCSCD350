@@ -3,20 +3,37 @@ import mazeUtils.*;
 
 public class GameManager {
 	
+	public static ScannerClass fin = new ScannerClass();
+	public static Regex regex = new Regex();
+	
 	public static void main(String[] args) {
-		ScannerClass fin = new ScannerClass();
-		int choice;
-		
-		System.out.println("		------------------MOVIE TRIVIA MAZE--------------------\n");
-		
-		do {
 
-			gameStartMenu();
+		gameStart();
+	}
+	
+	public static void gameStart() {
+		int choice = 5;
+		boolean valid = false;
+		String choiceString = "";
+		
+		System.out.println("		------------------MOVIE TRIVIA MAZE--------------------\n");		
+		
+		System.out.println(PrintMaze.dungeonMasterDisplay());
+		gameStartMenu();
+		
+		while(!valid) {
 			choice = fin.readInt();
+			choiceString = choice + "";
 			
-			startSwitch(choice, fin);
-		}while(choice <= 3);
-
+			valid = regex.menuChoice5(choiceString);
+			
+			if(!valid) {
+				System.out.println("Enter an integer 1-5.");
+			}
+			
+		}
+			
+		startSwitch(choice, fin);
 	}
 	
 	public static void gameStartMenu() {
@@ -30,21 +47,22 @@ public class GameManager {
 	public static void startSwitch(int choice, ScannerClass fin) {
 		switch(choice) {
 		case 1:
-			System.out.println(PrintMaze.dungeonMasterDisplay());
+			System.out.println(PrintMaze.dungeonMasterDisplay2());
 			System.out.println("I am the Movie Master, and this is...");
 			System.out.println("	...Movie Trivia Maze!");
 			System.out.println("The game where you walk through a maze answering movie questions...");
 			System.out.println("...with almost no consequences!\n\n");
 			
-			System.out.println("Press Enter:\n\n"); // run against regex ****************************
+			System.out.println("Press Enter:\n\n");
 			fin.readNewLine();
 			
 			new runProgram(false);
-			
+
 			break;
 		case 2:
 			System.out.println("Loading game...");
 			new runProgram(true);
+			
 			break;
 		case 3:
 			System.out.println("\n		------------------INSTRUCTIONS--------------------\n");
@@ -57,11 +75,18 @@ public class GameManager {
 			System.out.println("* Locking enough doors to block your access to the exit will result in a GAME OVER.");
 			System.out.println("\n		------------------CHEATING--------------------\n");
 			System.out.println("* If you're really bad at trivia try using the name: 'Cheats' to always win.\n\n");
+			
+			gameStart();
+			
 			break;
 		case 4:
 			Question.createQuestion();
+			
+			gameStart();
+			
 			break;
-		default:
+			
+		case 5:
 			
 			System.out.println("		---------QUITTING--------\n");
 			System.out.println(PrintMaze.dungeonMasterDisplayBack());

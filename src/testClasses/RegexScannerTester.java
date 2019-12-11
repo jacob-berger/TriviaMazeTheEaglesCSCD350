@@ -31,10 +31,12 @@ public class RegexScannerTester {
 	public static void menu() {
 		System.out.println("1) Multiple choice (a, b, c, d,)");
 		System.out.println("2) Short answer (3-15 characters and spaces)");
-		System.out.println("3) True or False (T, F, t, f)");
+		System.out.println("3) True or False (true, false)");
 		System.out.println("4) Direction (n, s, e, w)");
 		System.out.println("5) Yes or No (yes, no, n, y)");
 		System.out.println("6) Menu Choice (int 1-9)");
+		System.out.println("7) Name entry (any chars 1-15 in length");
+
 	}
 	
 	public static void switchMethod(int choice) {
@@ -66,10 +68,9 @@ public class RegexScannerTester {
 			break;
 		case 3:
 			System.out.println("Enter T, F, t, or f: ");
-			charValue = scan.readChar();
+			stringValue = scan.readString();
 			
-			tempString = charValue + "";
-			passed = regex.trueFalse(tempString);
+			passed = regex.trueFalse(stringValue);
 			
 			System.out.println("Your entry PASSED: " + passed);
 			break;
@@ -95,7 +96,15 @@ public class RegexScannerTester {
 			numberValue = scan.readInt();
 			tempString = Integer.toString(numberValue);
 			
-			passed = regex.menuChoice(tempString);
+			passed = regex.menuChoice5(tempString);
+			
+			System.out.println("Your entry PASSED: " + passed);
+			break;
+		case 7:
+			System.out.println("Enter a name:");
+			stringValue = scan.readString();
+			
+			passed = regex.limitLength15(stringValue);
 			
 			System.out.println("Your entry PASSED: " + passed);
 			break;

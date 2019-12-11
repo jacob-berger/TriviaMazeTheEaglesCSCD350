@@ -34,10 +34,14 @@ public class ScannerClass implements Serializable {
 		return tempString;
 	}
 	
+	/**
+	 * readNewLine() is intended to allow 'enter' as input
+	 * all other values will be grabbed and remain unused.
+	 */
 	public void readNewLine() {
 		initScanner();
 	
-		String tempString = this.fin.nextLine();
+		this.fin.nextLine();
 	}
 	
 	/**

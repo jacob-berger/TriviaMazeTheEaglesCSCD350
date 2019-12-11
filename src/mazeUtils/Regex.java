@@ -2,24 +2,34 @@ package mazeUtils;
 
 import java.util.regex.Pattern;
 
-public class Regex {
+public class Regex{
 	
 	/* 
 	 * Class for scrubbing data
 	 * These private variables hold the regex specifications
 	 */
+	private String limitLen15 = "^.{1,15}$";
 	private String multChoice = "[abcd]{1}"; // a - d
-	private String trueFalse = "[t|f|T|F]{1}"; // t / f
-	private String shortAnswer = "[a-zA-Z ]{3,15}"; // no more than 15 (chars &| spaces)
+
+
 	private String direction = "[nsewNSEW]{1}"; // n,s,e,w
-	private String yesNo = "\\b(Yes|No|yes|no|y|n)\\b"; // yes, no, y, n
 	private String menuChoice = "[1-9]"; // 1-9
+	private String trueFalse = "True|False"; // t / f
+	private String shortAnswer = "[a-zA-Z1-9\\s]{1,20}"; // no more than 20 (chars &| spaces)
+	private String yesNo = "\\b(yes|no|y|n)\\b"; // yes, no, y, n
+	private String menuChoice5 = "[1-5]"; // 1-5
+	private String menuChoice4 = "[1-4]"; // 1-4
+	private String menuChoice3 = "[1-3]"; // 1-3
 	
 	/*
 	 * Each proceeding method takes a String that holds the 
 	 * user input and compares it against the appropriate regex
 	 * to verify proper input.
 	 */
+	
+	public boolean limitLength15(String answer) {
+		return Pattern.matches(this.limitLen15,  answer);
+	}
 	
 	public boolean multChoice(String choice) {
 		return Pattern.matches(this.multChoice, choice);
@@ -41,8 +51,16 @@ public class Regex {
 		return Pattern.matches(this.yesNo, choice);
 	}
 	
-	public boolean menuChoice(String choice) {
-		return Pattern.matches(this.menuChoice, choice);
+	public boolean menuChoice5(String choice) {
+		return Pattern.matches(this.menuChoice5, choice);
+	}
+	
+	public boolean menuChoice4(String choice) {
+		return Pattern.matches(this.menuChoice4, choice);
+	}
+	
+	public boolean menuChoice3(String choice) {
+		return Pattern.matches(this.menuChoice3, choice);
 	}
 	
 	

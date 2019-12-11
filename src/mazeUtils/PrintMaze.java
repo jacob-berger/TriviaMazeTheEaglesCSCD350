@@ -22,6 +22,22 @@ public class PrintMaze {
 		return master;
 	}
 	
+	public static String dungeonMasterDisplay2() {
+		String master = "";
+		
+		master += "           __   _ \n";
+		master += "          | //// |  \n";
+		master += "          |/    \\|  \n";    
+		master += "         '[0]--[0]'   \n";
+		master += "         (  /..\\  )  \n";
+		master += "          |(IIII)|\n";
+		master += "           \\(__)/\n";		
+		master += "      _____|>()<|_____\n";
+		master += "     / |   \\    /   | \\\n";
+		
+		return master;
+	}
+	
 	public static String dungeonMasterDisplaySmile() {
 		String master = "";
 		master += "           ?     \n";
@@ -95,7 +111,7 @@ public class PrintMaze {
 		master += "         '[O]--[O]'    <       WHAT!?       |\n";
 		master += "      *  ( -/..\\- )     | You're CHEATING?! |\n";
 		master += "          |/vvvv\\|      |___________________| \n";
-		master += "          ||____||      \n";
+		master += "          ||^^^^||      \n";
 		master += "           \\(__)/\n";		
 		master += "      _____|>()<|_____\n";
 		master += "     / |   \\    /   | \\\n";
@@ -157,7 +173,7 @@ public class PrintMaze {
 
 		master += "        /|        |\\ \n";
 		master += "        \\\\____ ___// \n";
-		master += "         \\| //// |/       ___________\n";
+		master += "         \\| //// |/      ___________\n";
 		master += "    *     |/ \\/ \\|  *   |           |\n";    
 		master += "         '[0]--[0]'    <  Come back |\n";		
 		master += "         ( -/..\\- )     | soon...   |\n";
@@ -197,15 +213,25 @@ public class PrintMaze {
 		skull += "          |HHHH| \n";
 		skull += "           \\__/ \n";
 		skull += "         __/||\\__ \n";
-		skull += "       ())--{}--())\n";
+		skull += "      ()){--{}--}())\n";
 		skull += "      // {--{}--} \\\\\n";
 		skull += "     //  {__/\\__}  \\\\\n";
-		skull += "    (<      {}      >) \n";
-		skull += "     \\\\     {}     // \n";
+		skull += "            {}         \n";
+		
 		
 		return skull;
 	}
 	
+	/**
+	 * The current state of the maze is printed to the console. This 
+	 * includes the player location and the state of each door in 
+	 * the maze. Each room is iterated through and printed line by line.
+	 * @param rooms
+	 * @param loc
+	 * @param rLength
+	 * @param cLength
+	 * @return
+	 */
 	public static String displayRoom(Room[][] rooms, int[] loc, int rLength, int cLength) {
 		System.out.println("\n		----------MAZE----------");
 		String maze = "";
@@ -295,7 +321,7 @@ public class PrintMaze {
 		
 		return room;
 	}
-	
+
 	private static String westWall(int wallRowNum, int[] loc, int row, int col, Door wD, Door eD, String spaces) {
 		String room = "";
 		

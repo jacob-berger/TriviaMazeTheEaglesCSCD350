@@ -15,6 +15,7 @@ public class runProgram {
 	 */
 	private Maze myMaze;
 	private ScannerClass scan = new ScannerClass();
+	private Regex regex= new Regex();
 	private boolean load = false;
 	private boolean loadFailed = false;
 	
@@ -27,12 +28,12 @@ public class runProgram {
 		
 		if (!load) {
 			
-			Player player = new Player(promptName()); // run against regex ************************************		
+			Player player = new Player(promptName());
 			
 			if(player.getName().equals("Cheats")) {
 				System.out.println("		---------CHEATS ENABLED---------\n");
 				System.out.println(PrintMaze.dungeonMasterDisplayCheater());
-				System.out.println("Press Enter:\n\n"); // run against regex ****************************
+				System.out.println("Press Enter:\n\n");
 				this.scan.readNewLine();
 			}
 			
@@ -79,35 +80,63 @@ public class runProgram {
 		}
 		
 		if (!loadFailed) {
+			String menuChoice = "";
+			boolean valid = false;
+			
 			do {
 				System.out.println("Press Enter:");
-				this.scan.readNewLine();// run against regex **********************************
-				menu();
-				choice = this.scan.readInt(); // run against regex ********************************
+				this.scan.readNewLine();
+				menu(); // 1,2,3
+				
+				while(!valid) {
+					choice = this.scan.readInt();
+					menuChoice = choice + "";
+					valid = this.regex.menuChoice3(menuChoice);
+					
+					if(!valid) {
+						System.out.println("Enter an integer 1-3.");
+					}
+				}
+				
 				quit = menuSwitch(choice);
-
+				valid = false;
 			} while (!quit && this.myMaze.getEndReachable() && !this.myMaze.didPlayerWin());
+			
 			if (this.myMaze.didPlayerWin()) {
 				won();
-			} else if (!this.myMaze.getEndReachable()) {
+			} 
+			else if (!this.myMaze.getEndReachable()) {
 				System.out.println(PrintMaze.dungeonMasterDisplayDeath());
 				System.out.println("Oh no! It appears you can no longer reach the end...\n");
 				System.out.println("..." + myMaze.getPlayerName() + "'s fate...");
 				System.out.println(PrintMaze.deathDisplay());
-				System.out.println("\n-----------GAME OVER.-----------\n");
+				System.out.println("	\n-----------GAME OVER-----------\n");
 			} 
 		}
 	}
 
 	private String promptName() {
 		System.out.println(PrintMaze.dungeonMasterDisplayName());
-		System.out.println("Name: ");
-		return this.scan.readString();// run against regex ***************************
+		
+		String name = "";
+		boolean valid = false;
+		
+		while(!valid) {
+			System.out.println("Name: ");
+			name = scan.readString();
+			valid = this.regex.limitLength15(name);
+			
+			if(!valid) {
+				System.out.println("Enter a name 1-15 characters long.");
+			}
+		}
+		
+		return name;
 	}
 	/**
 	 * menu() displays initial player choices
 	 */
-	private void menu() { // add numbers associated with choices
+	private void menu() { 
 		System.out.println("            ---------WHAT WOULD YOU LIKE TO DO?---------");
 		System.out.println("1) Move");
 		System.out.println("2) Save");
@@ -118,7 +147,7 @@ public class runProgram {
 	 * menu2() displays player choices after deciding to move to
 	 * another room (choice 1 from menu())
 	 */
-	private void menu2() { // add numbers associated with choices
+	private void menu2() {
 		System.out.println("            ---------WHICH ROOM?---------");
 		System.out.println("1) Move to North room.");
 		System.out.println("2) Move to East room.");
@@ -137,16 +166,31 @@ public class runProgram {
 				
 		switch(choice) {
 		case 1:
-			menu2();
-			choice = this.scan.readInt(); // run against regex **********************************
-			menu2Switch(choice);
+			int choice2 = 0;
+			boolean valid = false;
+			String choiceString = "";
+			
+			menu2(); // 1,2,3,4
+			
+			while(!valid) {
+				choice2 = this.scan.readInt(); 
+				choiceString = choice2 + "";
+				valid = this.regex.menuChoice4(choiceString);
+				
+				if(!valid) {
+					System.out.println("Enter an integer 1-4.");
+				}
+			}
+			
+			menu2Switch(choice2);
 			
 			break;
 		case 2:
 			save(myMaze);
 			break;
 		case 3:
-			System.out.println("Quitting...");
+			System.out.println("	-----------QUITTING-----------\n");
+			System.out.println(PrintMaze.dungeonMasterDisplayBack());
 			return true;
 		}
 		return false;
